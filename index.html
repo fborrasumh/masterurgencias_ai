@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laboratorio IA · Medicina de Urgencias-Emergencias UMH — 20 simuladores de obligado uso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#101828;--ink2:#475467;--ink3:#98A2B3;--paper:#F2F4F7;--card:#fff;--line:#E4E7EC}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink)}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif}
+.hero{background:#B42318;color:#fff;padding:56px 22px 46px;text-align:left}
+.hero .wrap{max-width:1040px;margin:0 auto}
+.hero .eyebrow{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:#FECDCA;font-weight:600}
+.hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);line-height:1.15;margin:12px 0 14px;max-width:820px}
+.hero p{color:#FEE4E2;max-width:700px;line-height:1.6;font-size:.95rem}
+.hero .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.hero .chip{border:1px solid #F97066;border-radius:999px;padding:5px 13px;font-size:.75rem;color:#FEE4E2}
+main{max-width:1040px;margin:0 auto;padding:36px 18px 70px}
+.mod{margin-bottom:34px}
+.mod-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.mod-head .dot{width:12px;height:12px;border-radius:4px;background:var(--mc)}
+.mod-head h2{font-size:1.02rem}
+.mod-head .count{font-size:.72rem;color:var(--ink3);font-weight:600;margin-left:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.app{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--mc);border-radius:14px;padding:18px;text-decoration:none;color:var(--ink);transition:transform .12s, box-shadow .12s}
+.app:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(16,24,40,.10)}
+.app .icon{width:44px;height:44px;border-radius:11px;background:var(--mc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.app b{display:block;font-family:'Space Grotesk';font-size:1rem}
+.app span{display:block;font-size:.76rem;color:var(--mc);font-weight:600;margin:2px 0 7px}
+.app p{font-size:.79rem;color:var(--ink2);line-height:1.5}
+.notice{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:34px;font-size:.85rem;color:var(--ink2);line-height:1.6}
+.notice.warn{border-color:#FEC84B;background:#FFFCF5}
+footer{text-align:center;font-size:.72rem;color:var(--ink3);padding:22px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="hero"><div class="wrap">
+<div class="eyebrow">Máster Universitario en Medicina de Urgencias-Emergencias · Universidad Miguel Hernández de Elche</div>
+<h1>Laboratorio de simulación con IA: 20 apps de obligado uso</h1>
+<p>Cada app es un simulador de práctica clínica deliberada vinculado a una asignatura del plan de estudios: genera un caso realista, te sitúa en el rol del médico de urgencias, te enfrenta a pacientes, monitores y equipos de IA que evolucionan con tus decisiones, y evalúa tu desempeño con una rúbrica exportable. Todo funciona en el navegador, sin servidor: solo necesitas tu clave de API de OpenAI (botón 🔑 dentro de cada app).</p>
+<div class="chips"><span class="chip">2 cursos · 20 asignaturas</span><span class="chip">Simulación clínica</span><span class="chip">Rúbrica exportable</span><span class="chip">gpt-4o-mini</span><span class="chip">Sin backend · GitHub Pages</span></div>
+</div></div>
+<main>
+<div class="notice warn"><b>⚠ Aviso docente y de seguridad:</b> estas herramientas son <b>simuladores formativos</b> para el aprendizaje. <b>No sustituyen el juicio clínico, las guías oficiales ni la supervisión docente</b>, y ningún contenido generado debe emplearse en pacientes reales. Verifica siempre dosis, protocolos y decisiones con las fuentes oficiales vigentes (ERC/ILCOR, SEMES, protocolos SAMU/SUMMA y la documentación de cada asignatura).</div>
+<div class="notice"><b>Cómo se usa en la evaluación continua:</b> el estudiante realiza las sesiones indicadas por cada asignatura, exporta el informe (.md, .docx o PDF) con la transcripción y la rúbrica, y lo entrega como evidencia. El historial de sesiones se guarda en el propio navegador (IndexedDB). La clave de API se almacena solo en <code>localStorage</code> del estudiante y las llamadas van directas a la API de OpenAI; ningún dato pasa por servidores intermedios. La nota de la rúbrica es orientativa: la calificación final la fija el profesorado.</div>
+<section class="mod"><div class="mod-head" style="--mc:#B42318"><span class="dot"></span><h2>1er curso · Primer semestre</h2><span class="count">6 apps</span></div><div class="grid"><a class="app" style="--mc:#334155" href="bioetica-seguridad.html">
+<div class="icon">⚖</div>
+<div><b>BioéticaUrgencias·AI</b><span>El dilema ético a pie de cama</span><p>Casos de bioética y seguridad del paciente en urgencias: consentimiento, confidencialidad, negativa de tratamiento e incidentes. Razona con principios y marco legal frente a un comité de IA.</p></div>
+</a><a class="app" style="--mc:#7C3AED" href="psico-emergencia.html">
+<div class="icon">🧠</div>
+<div><b>PsicoEmergencia·AI</b><span>Primeros auxilios psicológicos</span><p>Interviene en crisis: víctima en shock, familiar tras muerte súbita o compañero con estrés agudo. Aplica PAP y gestiona tu propio estrés situacional.</p></div>
+</a><a class="app" style="--mc:#0E7490" href="farmacologia-clinica.html">
+<div class="icon">💉</div>
+<div><b>FarmacoUrgencias·AI</b><span>El fármaco y la dosis correctos</span><p>Elige fármaco, calcula dosis y perfusiones, y anticipa interacciones o intoxicaciones. Un farmacólogo de IA audita tu seguridad con una trampa oculta.</p></div>
+</a><a class="app" style="--mc:#475467" href="diagnostico-imagen.html">
+<div class="icon">🩻</div>
+<div><b>ImagenUrgente·AI</b><span>Lee la imagen, decide la conducta</span><p>Interpreta Rx, TC y ecografía (eFAST) descritas y decide. Un radiólogo de IA revela hallazgos solo si pides la proyección correcta e integras con la clínica.</p></div>
+</a><a class="app" style="--mc:#B42318" href="emergencias-hospitalarias.html">
+<div class="icon">🏥</div>
+<div><b>BoxCrítico·AI</b><span>Un paciente inestable acaba de entrar</span><p>Estabiliza en el box de críticos con secuencia ABCDE. El monitor de IA evoluciona: si omites un paso, el paciente empeora.</p></div>
+</a><a class="app" style="--mc:#C2410C" href="urgencias-fuera-hospital.html">
+<div class="icon">🚑</div>
+<div><b>ExtraHospital·AI</b><span>Escena con recursos limitados</span><p>Urgencia extrahospitalaria: valora escena, estabiliza in situ y decide recurso y traslado coordinando con la central. La escena de IA reacciona a tu logística.</p></div>
+</a></div></section>
+<section class="mod"><div class="mod-head" style="--mc:#C2410C"><span class="dot"></span><h2>1er curso · Segundo semestre</h2><span class="count">5 apps</span></div><div class="grid"><a class="app" style="--mc:#15803D" href="urgencias-hospitalarias-1.html">
+<div class="icon">🏷</div>
+<div><b>TriajeHospitalario·AI</b><span>Prioriza: quién primero y por qué</span><p>Asume el triaje estructurado (Manchester/SET). Un adjunto de IA cuestiona tus niveles y la sala se llena si te retrasas.</p></div>
+</a><a class="app" style="--mc:#166534" href="urgencias-hospitalarias-2.html">
+<div class="icon">🧪</div>
+<div><b>DecisiónClínica·AI</b><span>Del síntoma al diagnóstico y al destino</span><p>Maneja un caso completo: anamnesis, pruebas razonadas, diferencial, tratamiento y decisión de ingreso/alta con red de seguridad.</p></div>
+</a><a class="app" style="--mc:#0369A1" href="emergencias-respiratorias.html">
+<div class="icon">🫁</div>
+<div><b>VíaAérea·AI</b><span>No respira bien y el reloj corre</span><p>Emergencia respiratoria extrahospitalaria: oxigena, ventila y escala. El paciente de IA se desatura si te demoras o fallas la secuencia.</p></div>
+</a><a class="app" style="--mc:#6D28D9" href="emergencias-neurologicas.html">
+<div class="icon">🧠</div>
+<div><b>NeuroCódigo·AI</b><span>Tiempo es cerebro</span><p>Sospecha de ictus, crisis o coma. Aplica escalas prehospitalarias, descarta imitadores, activa código ictus y elige centro útil.</p></div>
+</a><a class="app" style="--mc:#BE123C" href="emergencias-cardiovasculares.html">
+<div class="icon">❤</div>
+<div><b>CódigoInfarto·AI</b><span>Dolor torácico y un ECG que decide</span><p>SCA, arritmia letal o PCR. Interpreta el ECG descrito, aplica el algoritmo ERC de SVA y activa código infarto. El monitor cambia con tus decisiones.</p></div>
+</a></div></section>
+<section class="mod"><div class="mod-head" style="--mc:#1E40AF"><span class="dot"></span><h2>2º curso</h2><span class="count">9 apps</span></div><div class="grid"><a class="app" style="--mc:#B45309" href="cirugia-urgencia-1.html">
+<div class="icon">🩹</div>
+<div><b>ABCDE·Trauma·AI</b><span>Politrauma: reconocimiento primario</span><p>ABCDE del trauma con control de hemorragia e inmovilización. El paciente de IA se descompensa si omites una amenaza vital.</p></div>
+</a><a class="app" style="--mc:#9A3412" href="cirugia-urgencia-2.html">
+<div class="icon">🔪</div>
+<div><b>QuirófanoUrgente·AI</b><span>¿Abdomen agudo quirúrgico?</span><p>Abdomen agudo, hemorragia u obstrucción: estabiliza, estudia e indica cirugía. Un cirujano de IA reta tu indicación, tu timing y tu SBAR.</p></div>
+</a><a class="app" style="--mc:#DB2777" href="urgencias-pediatria.html">
+<div class="icon">🧸</div>
+<div><b>PediUrgencias·AI</b><span>El niño no es un adulto pequeño</span><p>Triángulo de Evaluación Pediátrica, dosis por peso y deterioro tardío y brusco. El niño y su familia de IA responden a tu manejo y comunicación.</p></div>
+</a><a class="app" style="--mc:#1E40AF" href="paciente-critico-1.html">
+<div class="icon">🖥</div>
+<div><b>UCIVirtual·AI</b><span>Reconocer y estabilizar el shock</span><p>Clasifica el shock y guía la reanimación por objetivos con monitorización. El monitor de IA responde a fluidos y vasoactivos de forma realista.</p></div>
+</a><a class="app" style="--mc:#1D4ED8" href="paciente-critico-2.html">
+<div class="icon">🫁</div>
+<div><b>VentilaShock·AI</b><span>Ventilación mecánica y fallo multiorgánico</span><p>SDRA y ventilación protectora: ajusta el respirador y la sedoanalgesia. La gasometría de IA reacciona a cada cambio, con complicaciones a detectar.</p></div>
+</a><a class="app" style="--mc:#C026D3" href="paciente-critico-pediatrico.html">
+<div class="icon">👶</div>
+<div><b>PediCrítico·AI</b><span>El niño crítico: márgenes estrechos</span><p>Shock, insuficiencia respiratoria o PCR pediátrica ajustada al peso (ERC). El deterioro es rápido y la familia de IA observa.</p></div>
+</a><a class="app" style="--mc:#0F766E" href="cuidados-paliativos.html">
+<div class="icon">🕊</div>
+<div><b>PaliativosUrgencias·AI</b><span>Cuando el objetivo es el confort</span><p>Urgencia paliativa: control de síntomas refractarios, adecuación del esfuerzo terapéutico y sedación. Paciente y familia de IA con deseos a veces contradictorios.</p></div>
+</a><a class="app" style="--mc:#78350F" href="aparato-locomotor.html">
+<div class="icon">🦴</div>
+<div><b>TraumaLocomotor·AI</b><span>De lo banal a lo que no espera</span><p>Fractura, luxación, lumbalgia o monoartritis: distingue lo banal de la emergencia (compartimental, artritis séptica, cauda equina) explorando bien.</p></div>
+</a><a class="app" style="--mc:#4338CA" href="psiquiatricas.html">
+<div class="icon">🗣</div>
+<div><b>PsiquiatríaUrgente·AI</b><span>La crisis que también es urgencia</span><p>Agitación, riesgo autolítico o psicosis: asegura, descarta organicidad, valora el riesgo y contén con enfoque humano y legal.</p></div>
+</a></div></section>
+<section class="mod"><div class="mod-head" style="--mc:#101828"><span class="dot"></span><h2>Trabajo Fin de Máster</h2><span class="count">1 app</span></div><div class="grid"><a class="app" style="--mc:#101828" href="tfm-coach.html">
+<div class="icon">🎓</div>
+<div><b>TFM·Coach·Urgencias</b><span>Tu TFM, sesión a sesión</span><p>Un tutor de IA te acompaña en el Trabajo Fin de Máster: pregunta e hipótesis, metodología, estructura IMRyD y defensa, con evaluación por rúbrica.</p></div>
+</a></div></section>
+</main>
+<footer>Laboratorio IA · Máster Universitario en Medicina de Urgencias-Emergencias · Universidad Miguel Hernández de Elche<br>Simuladores docentes de uso interno · No constituyen consejo médico · No sustituyen el juicio clínico ni las guías oficiales</footer>
+</body>
+</html>
