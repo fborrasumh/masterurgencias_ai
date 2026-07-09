@@ -55,42 +55,49 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--accent-soft);bor
 .btn.ghost:hover{color:var(--accent);border-color:var(--accent);filter:none}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 
-/* ---------- ARQUITECTURA DE CONTENCIÓN FIJA (REVISADA) ---------- */
+/* ---------- ARQUITECTURA DE TRABAJO EN PANTALLA DIVIDIDA 50/50 ---------- */
 @media(min-width: 901px) {
-  /* Si la simulación está activa en pantalla grande, congelamos la ventana principal */
   body:has(#fase2:not(.hidden)) {
     height: 100vh;
     overflow: hidden;
   }
   body:has(#fase2:not(.hidden)) main {
-    height: calc(100vh - 75px); /* Restamos la altura estimada del header */
+    height: calc(100vh - 75px);
+    max-width: 1350px; /* Ampliado para explotar la pantalla dividida */
     overflow: hidden;
-    padding-bottom: 15px;
+    padding: 16px 18px;
   }
   .dashboard-layout {
     flex: 1;
-    min-height: 0; /* Clave de flexbox para permitir colapso y scroll interno */
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 50% Izquierda, 50% Derecha exacto */
+    gap: 16px;
+    height: 100%;
+  }
+  .fixed-control-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+    overflow-y: auto; /* Scroll de seguridad si el monitor/botones exceden pantallas pequeñas */
+    padding-right: 4px;
+  }
+  .scroll-history-panel {
     display: flex;
     flex-direction: column;
     gap: 14px;
+    height: 100%;
+    overflow-y: auto; /* Scroll independiente para la cronología */
+    padding-right: 6px;
   }
-  .scroll-history-panel {
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto; /* Solo esta caja generará barra de scroll en escritorio */
+  .action-grid {
+    grid-template-columns: repeat(2, 1fr) !important; /* Cuadrícula optimizada de 2x2 para el ancho del 50% */
   }
 }
 
 .fixed-control-box {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  flex-shrink: 0; /* Evita radicalmente que los mandos superiores se encojan */
-}
-.split-control-grid {
-  display: grid;
-  grid-template-columns: 2.2fr 1fr;
-  gap: 14px;
+  flex-shrink: 0;
 }
 
 /* ---------- MONITOR DE CONSTANTES VITALES ---------- */
@@ -159,9 +166,6 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--accent-soft);bor
   border: 1px solid var(--line);
   border-radius: var(--r);
   padding: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
   box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);
 }
 .history-header-title {
@@ -172,14 +176,15 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--accent-soft);bor
   letter-spacing: 0.08em;
   border-bottom: 1px dashed var(--line);
   padding-bottom: 6px;
+  margin-bottom: 12px;
   flex-shrink: 0;
 }
-.esc-box { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin-bottom: 4px; flex-shrink: 0; }
+.esc-box { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-bottom: 12px; flex-shrink: 0; }
 .esc-box h2 { font-size: 1rem; margin-bottom: 6px; color: var(--ink); }
 .esc-box .tag { display: inline-block; font-size: .65rem; font-weight: 700; text-transform: uppercase; background: var(--accent); color: #fff; border-radius: 4px; padding: 2px 7px; margin-bottom: 8px; }
 .esc-box p { font-size: .85rem; line-height: 1.5; color: var(--ink); white-space: pre-wrap; }
-.datos { margin-top: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 6px; }
-.datos div { font-size: .8rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; }
+.datos { margin-top: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 6px; }
+.datos div { font-size: .78rem; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; }
 
 /* ---------- TIMER DE ESTRÉS ---------- */
 .timer-box { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: .8rem; color: var(--warn); background: var(--paper); border: 1px solid var(--line); padding: 6px 12px; border-radius: 6px; }
@@ -227,8 +232,7 @@ footer{text-align:center;font-size:.72rem;color:var(--ink-3);padding:14px;margin
 
 /* RESPONSIVE RESPALDO MÓVILES */
 @media(max-width: 900px){
-  .dashboard-layout { height: auto; }
-  .split-control-grid { grid-template-columns: 1fr; }
+  .dashboard-layout { height: auto; display: flex; flex-direction: column; }
   .action-grid { grid-template-columns: repeat(2, 1fr); } 
   .monitor-panel{ grid-template-columns: repeat(2, 1fr); }
   .scroll-history-panel { overflow-y: visible; height: auto; }
@@ -281,10 +285,10 @@ footer{text-align:center;font-size:.72rem;color:var(--ink-3);padding:14px;margin
     <div id="status"></div>
   </section>
 
-  <!-- FASE 2: ENTORNO INTEGRADO DE CUADRO DE MANDO -->
+  <!-- FASE 2: ENTORNO INTEGRADO DE CUADRO DE MANDO (PANTALLA DIVIDIDA 50/50) -->
   <section id="fase2" class="hidden dashboard-layout">
     
-    <!-- BLOQUE FIJO SUPERIOR (Monitor + Acciones + Chat Input) -->
+    <!-- COLUMNA IZQUIERDA: MANDOS Y MONITOR (50%) -->
     <div class="fixed-control-box">
       
       <!-- 1. MONITOR ELECTRÓNICO REALTIME -->
@@ -296,61 +300,57 @@ footer{text-align:center;font-size:.72rem;color:var(--ink-3);padding:14px;margin
         <div class="mon-box temp"><div class="mon-lbl">Tª <span class="mon-unit">ºC</span></div><div class="mon-val" id="vTemp">--.-</div></div>
       </div>
 
-      <!-- 2. CONTROL COMPUESTO DIVISIONAL -->
-      <div class="split-control-grid">
-        
-        <!-- PANELES ABCDE -->
-        <div class="action-panel">
-          <div class="action-title">Órdenes Clínicas Inmediatas (Clic)</div>
-          <div class="action-grid">
-            <div class="action-col">
-              <h4>A - Vía Aérea</h4>
-              <button class="btn-act" onclick="clickAction('Aspirar secreciones y posicionar cabeza')">Aspirar/Posicionar</button>
-              <button class="btn-act" onclick="clickAction('Colocar tubo de Guedel')">Cánula Guedel</button>
-              <button class="btn-act" onclick="clickAction('Preparar e iniciar Intubación de Secuencia Rápida (ISR)')">Iniciar ISR</button>
-            </div>
-            <div class="action-col">
-              <h4>B - Ventilación</h4>
-              <button class="btn-act" onclick="clickAction('Oxigenoterapia con mascarilla con reservorio a 15 L/min')">Mascarilla 15L</button>
-              <button class="btn-act" onclick="clickAction('Ventilación con bolsa-mascarilla (Ambu) con O2')">Bolsa Ambu</button>
-              <button class="btn-act" onclick="clickAction('Preparar y conectar Ventilación Mecánica No Invasiva (VMNI)')">Conectar VMNI</button>
-            </div>
-            <div class="action-col">
-              <h4>C - Circulación</h4>
-              <button class="btn-act" onclick="clickAction('Canalizar 2 vías periféricas de grueso calibre')">Vías Gruesas x2</button>
-              <button class="btn-act" onclick="clickAction('Iniciar bolo rápido de 500 ml de cristaloides')">Bolo Cristaloides</button>
-              <button class="btn-act" onclick="clickAction('Administrar 1 mg de Adrenalina IV')">Adrenalina 1mg IV</button>
-              <button class="btn-act" onclick="clickAction('Realizar desfibrilación eléctrica inmediata (200 J)')">⚡ Desfibrilar</button>
-            </div>
-            <div class="action-col">
-              <h4>D/E + Pruebas</h4>
-              <button class="btn-act" onclick="clickAction('Realizar ECG de 12 derivaciones inmediato')">ECG 12 deriv.</button>
-              <button class="btn-act" onclick="clickAction('Efectuar ecografía a pie de cama (Eco-FAST)')">Eco-FAST</button>
-              <button class="btn-act" onclick="clickAction('Extraer analítica completa, troponinas y gasometría arterial')">Analítica/Gasom.</button>
-            </div>
+      <!-- 2. PANELES DE ACCIONES ABCDE -->
+      <div class="action-panel">
+        <div class="action-title">Órdenes Clínicas Inmediatas (Clic)</div>
+        <div class="action-grid">
+          <div class="action-col">
+            <h4>A - Vía Aérea</h4>
+            <button class="btn-act" onclick="clickAction('Aspirar secreciones y posicionar cabeza')">Aspirar/Posicionar</button>
+            <button class="btn-act" onclick="clickAction('Colocar tubo de Guedel')">Cánula Guedel</button>
+            <button class="btn-act" onclick="clickAction('Preparar e iniciar Intubación de Secuencia Rápida (ISR)')">Iniciar ISR</button>
+          </div>
+          <div class="action-col">
+            <h4>B - Ventilación</h4>
+            <button class="btn-act" onclick="clickAction('Oxigenoterapia con mascarilla con reservorio a 15 L/min')">Mascarilla 15L</button>
+            <button class="btn-act" onclick="clickAction('Ventilación con bolsa-mascarilla (Ambu) con O2')">Bolsa Ambu</button>
+            <button class="btn-act" onclick="clickAction('Preparar y conectar Ventilación Mecánica No Invasiva (VMNI)')">Conectar VMNI</button>
+          </div>
+          <div class="action-col">
+            <h4>C - Circulación</h4>
+            <button class="btn-act" onclick="clickAction('Canalizar 2 vías periféricas de grueso calibre')">Vías Gruesas x2</button>
+            <button class="btn-act" onclick="clickAction('Iniciar bolo rápido de 500 ml de cristaloides')">Bolo Cristaloides</button>
+            <button class="btn-act" onclick="clickAction('Administrar 1 mg de Adrenalina IV')">Adrenalina 1mg IV</button>
+            <button class="btn-act" onclick="clickAction('Realizar desfibrilación eléctrica inmediata (200 J)')">⚡ Desfibrilar</button>
+          </div>
+          <div class="action-col">
+            <h4>D/E + Pruebas</h4>
+            <button class="btn-act" onclick="clickAction('Realizar ECG de 12 derivaciones inmediato')">ECG 12 deriv.</button>
+            <button class="btn-act" onclick="clickAction('Efectuar ecografía a pie de cama (Eco-FAST)')">Eco-FAST</button>
+            <button class="btn-act" onclick="clickAction('Extraer analítica completa, troponinas y gasometría arterial')">Analítica/Gasom.</button>
           </div>
         </div>
-
-        <!-- CAJA DE TEXTO LIBRE Y MANDOS DE EVALUACIÓN -->
-        <div class="composer-panel">
-          <div class="action-title">Anamnesis / Órdenes Libres</div>
-          <div class="composer-area">
-            <textarea id="inMsg" placeholder="Escribe al paciente o enfermería..."></textarea>
-            <button class="btn" id="btnSend">Enviar</button>
-          </div>
-          <div class="dashboard-controls">
-            <div class="timer-box" id="timerDisplay">⏱️ --s</div>
-            <span id="turnCount" style="font-size:.75rem;color:var(--ink-2);font-weight:600"></span>
-            <div class="hspacer" style="flex:1"></div>
-            <button class="btn ghost" id="btnRestart" title="Reiniciar caso" style="padding: 6px 10px;">↺</button>
-            <button class="btn" id="btnEval" style="padding: 7px 14px; font-size:.8rem">🏁 Evaluar</button>
-          </div>
-        </div>
-
       </div>
+
+      <!-- 3. COMPOSER / CONTROL CENTRAL -->
+      <div class="composer-panel">
+        <div class="action-title">Anamnesis / Órdenes Libres</div>
+        <div class="composer-area">
+          <textarea id="inMsg" placeholder="Escribe al paciente o enfermería..."></textarea>
+          <button class="btn" id="btnSend">Enviar</button>
+        </div>
+        <div class="dashboard-controls">
+          <div class="timer-box" id="timerDisplay">⏱️ --s</div>
+          <span id="turnCount" style="font-size:.75rem;color:var(--ink-2);font-weight:600"></span>
+          <div class="hspacer" style="flex:1"></div>
+          <button class="btn ghost" id="btnRestart" title="Reiniciar caso" style="padding: 6px 10px;">↺</button>
+          <button class="btn" id="btnEval" style="padding: 7px 14px; font-size:.8rem">🏁 Evaluar</button>
+        </div>
+      </div>
+
     </div>
 
-    <!-- BLOQUE INDEPENDIENTE: CAJA DE EVOLUCIÓN HISTÓRICA CON SCROLL SEPARADO -->
+    <!-- COLUMNA DERECHA: HISTORIAL Y CHAT LOGS CONTINUOS (50%) -->
     <div class="scroll-history-panel">
       <div class="history-header-title">Cronología y Evolución del Cuadro de Reanimación</div>
       <div class="esc-box" id="escBox"></div>
@@ -607,9 +607,11 @@ function addMsg(role, text){
   const div = document.createElement("div"); div.className = "msg " + role; div.textContent = text;
   $("msgs").appendChild(div);
   
-  // Auto-scroll del panel interno aislado
+  // Forzar scroll al fondo absoluto del panel de historial independiente
   const scrollBox = document.querySelector(".scroll-history-panel");
-  if(scrollBox) scrollBox.scrollTop = scrollBox.scrollHeight;
+  if(scrollBox) {
+    scrollBox.scrollTop = scrollBox.scrollHeight;
+  }
   
   return div;
 }
