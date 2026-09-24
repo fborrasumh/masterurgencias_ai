@@ -9,7 +9,7 @@ Estas herramientas son **simuladores formativos**. **No sustituyen el juicio cl�
 ## Arquitectura (kernel compartido)
 
 - Single-file HTML + JavaScript vanilla, sin frameworks ni backend.
-- Modelo `gpt-4o-mini` vía API de OpenAI; clave en `localStorage` (`ia_openai_key`), compartida entre todas las apps del mismo dominio.
+- Modelo `gpt-6-luna` (temperatura 1) vía API de OpenAI; clave en `localStorage` (`ia_openai_key`), compartida entre todas las apps del mismo dominio.
 - Flujo en 3 fases: **Caso clínico generado por IA → Simulación en rol (paciente / monitor / equipo) → Evaluación con rúbrica (JSON estructurado)**.
 - Historial de sesiones en **IndexedDB** (una base por app: `medurg_umh_<id>`).
 - Exportación de informe: **Markdown**, **.docx** (docx.js con carga perezosa desde CDN) e impresión/PDF del navegador.
